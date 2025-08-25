@@ -1,31 +1,34 @@
-public class RemoveDuplicate
+import java.util.*;
+class RemoveDuplicate
 {
-	public static void RemoveDuplicate(ArrayADT array)
+	public static void RemoveDuplicate(Stack<Integer> stack)
 	{
-		for(int i=0;i<array.getSize();i++)
+		Stack<Integer> s1=new Stack<>();
+		while(!stack.isEmpty())
 		{
-			int a=array.get(i);
-			int j=i+1;
-			while(j<array.getSize())
+			int elt=stack.pop();
+			if(!s1.contains(elt))
 			{
-				if (a == array.get(j))
-					array.delete(i);
-				j++;
+				s1.push(elt);
 			}
 		}
-		System.out.println("The array without duplicate : ");
-		array.traverse();
+		//Stack<Integer> s2=new Stack<>();
+		while(!s1.isEmpty())
+		{
+			stack.push(s1.pop());
+		}
 	}
-	public static void main(String[] args)
+	public static void main(String args[])
 	{
-		ArrayADT A1=new ArrayADT(5);
-		A1.insert(0, 5);
-        A1.insert(1, 2);
-        A1.insert(2, 7);
-        A1.insert(3, 3);
-		A1.insert(4, 2);
-		System.out.println();
-		A1.traverse();
-		RemoveDuplicate(A1);
+		Stack<Integer> stack=new Stack<>();
+		stack.push(4);
+		stack.push(4);
+		stack.push(7);
+		stack.push(3);
+		stack.push(6);
+		System.out.println("Original stack:"+stack);
+		RemoveDuplicate(stack);
+		System.out.println("Array without duplicates:"+stack);
+		
 	}
 }
